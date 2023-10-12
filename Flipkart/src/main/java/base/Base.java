@@ -1,9 +1,6 @@
 package base;
 
 import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.http.HttpResponse;
 import java.time.Duration;
 
 import org.apache.commons.io.FileUtils;
@@ -75,24 +72,7 @@ public class Base
 	}
 	public void openUrl(String url)
 	{
-		try 
-		{
-			int respCode=200;		
-			HttpURLConnection huc = (HttpURLConnection)(new URL(url).openConnection());            //try to connect to the URL
-			huc.setRequestMethod("HEAD");
-			huc.connect();
-			respCode = huc.getResponseCode();//get the response code if response code is <400 it is valid link else broken link/dead lin
-			System.out.println(respCode);
-			if(respCode >= 400)
-			{
-				System.exit(0);
-			} 
-		}
-		catch(Exception e) 
-		{
-			System.out.println("Url is wrong");
-			System.exit(0);
-		}
+		
 		driver.get(url);
 		Assert.assertEquals(driver.getTitle(), "Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!");
 	}
